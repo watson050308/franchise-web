@@ -1,100 +1,38 @@
 <template>
-  <div id="app">
-    <header>
-      <nav>
-        <div class="logo">Tour.ink</div>
-        <div class="nav-links">
-          <a href="#" class="active">Home</a>
-          <a href="#">Booking Form</a>
-          <a href="#">Category</a>
-          <a href="#">About Us</a>
-        </div>
-        <div class="auth-buttons">
-          <button class="log-in">Log in</button>
-          <button class="sign-up">Sign up</button>
-        </div>
-      </nav>
-    </header>
-    
-    <main>
-      <hero-section></hero-section>
-      <search-section></search-section>
-      <popular-search></popular-search>
+  <div class="bg-white min-h-screen flex flex-col">
+    <BaseHeader />
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-12">
+      <SearchSection />
+      <CategoriesSection />
+      <WhyChooseUsSection />
+      <section class="text-center mb-16">
+        <h2 class="text-2xl font-semibold mb-4">準備好開始你的加盟之旅了嗎？</h2>
+        <BaseButton class="bg-blue-600 hover:bg-blue-700 text-white">
+          立即註冊
+        </BaseButton>
+      </section>
     </main>
+    <BaseFooter />
   </div>
 </template>
 
 <script>
-import HeroSection from './components/HeroSection.vue'
+import BaseHeader from './components/BaseHeader.vue'
+import BaseFooter from './components/BaseFooter.vue'
 import SearchSection from './components/SearchSection.vue'
-import PopularSearch from './components/PopularSearch.vue'
+import CategoriesSection from './components/CategoriesSection.vue'
+import WhyChooseUsSection from './components/WhyChooseUsSection.vue'
+import BaseButton from './components/ui/BaseButton.vue'
 
 export default {
   name: 'App',
   components: {
-    HeroSection,
+    BaseHeader,
+    BaseFooter,
     SearchSection,
-    PopularSearch
+    CategoriesSection,
+    WhyChooseUsSection,
+    BaseButton
   }
 }
 </script>
-
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f8f7ff;
-}
-
-#app {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-/* 導航欄樣式 */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #3d3b54;
-}
-
-.nav-links a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #3d3b54;
-}
-
-.nav-links a.active {
-  font-weight: bold;
-}
-
-.auth-buttons button {
-  padding: 10px 20px;
-  margin-left: 10px;
-  border-radius: 20px;
-}
-
-.log-in {
-  color: #3d3b54;
-}
-
-.sign-up {
-  background-color: #3d3b54;
-  color: white;
-}
-</style>
