@@ -1,22 +1,22 @@
 <template>
-    <section class="text-center mb-16">
-      <h1 class="text-4xl font-bold mb-4">找到你的理想加盟機會</h1>
-      <p class="text-xl text-gray-600 mb-8">探索數千個優質加盟品牌，開啟你的創業之旅</p>
-      <div class="flex justify-center">
-        <div class="relative">
-          <input
-            type="text"
-            placeholder="搜索加盟品牌或行業..."
-            class="pl-10 pr-4 py-2 w-96 border rounded-full"
-          />
-          <Search class="absolute left-3 top-2.5 text-gray-400" />
-        </div>
-        <BaseButton class="ml-2 bg-blue-600 hover:bg-blue-700">
-          搜索
-        </BaseButton>
+  <section class="text-center mb-16">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-4">找到你的理想加盟機會</h1>
+    <p class="text-lg sm:text-xl text-gray-600 mb-8">探索數千個優質加盟品牌，開啟你的創業之旅</p>
+    <div class="flex flex-col sm:flex-row justify-center items-center">
+      <div class="relative w-full sm:w-auto mb-4 sm:mb-0">
+        <input
+          type="text"
+          placeholder="搜索加盟品牌或行業..."
+          class="pl-10 pr-4 py-2 w-full sm:w-64 md:w-96 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600"
+        />
+        <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size="20" />
       </div>
-    </section>
-  </template>
+      <BaseButton class="w-full sm:w-auto sm:ml-2 bg-blue-600 hover:bg-blue-700 text-white">
+        搜索
+      </BaseButton>
+    </div>
+  </section>
+</template>
   
   <script>
   import { Search } from 'lucide-vue-next'

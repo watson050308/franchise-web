@@ -1,17 +1,17 @@
 <template>
-    <section class="mb-16">
-      <h2 class="text-2xl font-semibold mb-6">為什麼選擇FranchiseConnect</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <BaseCard v-for="(item, index) in reasons" :key="index" class="text-center">
-          <template #content>
-            <component :is="item.icon" class="mx-auto mb-4 text-blue-600" :size="48" />
-            <h3 class="font-semibold mb-2">{{ item.title }}</h3>
-            <p class="text-gray-600">{{ item.desc }}</p>
-          </template>
-        </BaseCard>
-      </div>
-    </section>
-  </template>
+  <section class="mb-16">
+    <h2 class="text-2xl font-semibold mb-6">為什麼選擇FranchiseConnect</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <BaseCard v-for="(item, index) in reasons" :key="index" class="text-center">
+        <template #content>
+          <component :is="item.icon" class="mx-auto mb-4 text-blue-600" :size="48" />
+          <h3 class="text-xl font-semibold mb-2">{{ item.title }}</h3>
+          <p class="text-gray-600">{{ item.desc }}</p>
+        </template>
+      </BaseCard>
+    </div>
+  </section>
+</template>
   
   <script>
   import { Users, BarChart, Award } from 'lucide-vue-next'
