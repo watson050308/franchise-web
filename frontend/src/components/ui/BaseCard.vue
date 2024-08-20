@@ -1,6 +1,7 @@
 <template>
   <div class="bg-white shadow rounded-lg overflow-hidden">
     <div v-if="$slots.header" class="px-4 py-5 sm:px-6">
+      <img alt="Vue logo" src="../../assets/category/餐飲.png">
       <slot name="header"></slot>
     </div>
     <div class="px-4 py-5 sm:p-6">

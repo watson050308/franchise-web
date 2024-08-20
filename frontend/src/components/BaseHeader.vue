@@ -3,10 +3,12 @@
     <nav class="flex justify-between items-center max-w-6xl mx-auto">
       <div class="text-2xl font-bold">FranchiseConnect</div>
       <div class="hidden sm:flex space-x-4 items-center">
-        <a href="#" class="hover:underline">尋找加盟機會</a>
+        <router-link to="/" class="hover:underline">尋找加盟機會</router-link>
+        <!-- <router-link to="/login" class="hover:underline">登入</router-link> -->
+        <!-- <a href="#" class="hover:underline">尋找加盟機會</a> -->
         <a href="#" class="hover:underline">加盟商支援</a>
         <a href="#" class="hover:underline">關於我們</a>
-        <BaseButton variant="outline" class="text-white border-white hover:bg-blue-700">登入</BaseButton>
+        <BaseButton variant="outline" class="text-white border-white hover:bg-blue-700"><router-link to="/login" class="hover:underline">登入</router-link></BaseButton>
       </div>
       <button @click="toggleMenu" class="sm:hidden">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
