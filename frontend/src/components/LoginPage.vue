@@ -1,57 +1,90 @@
-<!-- LoginPage.vue -->
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen bg-blue-600 p-4">
-    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-      <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">登入 FranchiseConnect</h2>
-      <form @submit.prevent="handleSubmit" class="space-y-4">
-        <div>
-          <input 
-            type="email" 
-            v-model="email" 
-            placeholder="電子郵件" 
-            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+  <div class="flex justify-center items-center min-h-screen bg-gradient-to-r from-indigo-100 to-teal-100 font-poppins">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <div class="text-2xl font-bold text-center text-indigo-600 mb-4">展覽平台</div>
+      <h2 class="text-2xl font-semibold text-center text-indigo-600 mb-6">{{ isLogin ? '登入' : '註冊' }}</h2>
+      <form @submit.prevent="handleSubmit">
+        <div v-if="!isLogin" class="mb-4">
+          <label for="name" class="block text-gray-700 mb-2">姓名</label>
+          <input type="text" id="name" v-model="name" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
         </div>
-        <div>
-          <input 
-            type="password" 
-            v-model="password" 
-            placeholder="密碼" 
-            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 mb-2">電子郵件</label>
+          <input type="email" id="email" v-model="email" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
         </div>
-        <button 
-          type="submit" 
-          class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-300"
-        >
-          登入
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700 mb-2">密碼</label>
+          <input type="password" id="password" v-model="password" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div v-if="!isLogin" class="mb-6">
+          <label for="confirmPassword" class="block text-gray-700 mb-2">確認密碼</label>
+          <input type="password" id="confirmPassword" v-model="confirmPassword" required
+                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <button type="submit"
+                class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300">
+          {{ isLogin ? '登入' : '註冊' }}
         </button>
       </form>
-      <div class="mt-4 text-center">
-        <p class="text-sm text-gray-600">
-          還沒有帳號？ 
-          <button @click="handleRegister" class="text-blue-600 hover:underline">
-            立即註冊
-          </button>
+      <div class="text-center mt-4">
+        <p>
+          {{ isLogin ? '還沒有帳號？' : '已有帳號？' }}
+          <a href="#" @click.prevent="toggleForm" class="text-indigo-600 hover:text-indigo-800 transition duration-300">
+            {{ isLogin ? '立即註冊' : '返回登入' }}
+          </a>
         </p>
+      </div>
+      <div class="mt-6 text-center">
+        <p class="text-gray-600 mb-2">或使用以下方式登入</p>
+        <div class="space-x-4">
+          <a href="#" class="inline-block px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300">Google</a>
+          <a href="#" class="inline-block px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition duration-300">Facebook</a>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-
-const email = ref('')
-const password = ref('')
-
-const handleSubmit = () => {
-  // 處理登入邏輯
-  console.log('Login attempt with:', email.value, password.value)
-}
-
-const handleRegister = () => {
-  // 處理註冊邏輯
-  console.log('Redirecting to registration page')
+<script>
+export default {
+  name: 'LoginPage',
+  data() {
+    return {
+      isLogin: true,
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
+  },
+  methods: {
+    toggleForm() {
+      this.isLogin = !this.isLogin
+      this.resetForm()
+    },
+    resetForm() {
+      this.name = ''
+      this.email = ''
+      this.password = ''
+      this.confirmPassword = ''
+    },
+    handleSubmit() {
+      if (this.isLogin) {
+        console.log('登入表單提交', { email: this.email, password: this.password })
+        // 在這裡處理登入邏輯
+      } else {
+        console.log('註冊表單提交', {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          confirmPassword: this.confirmPassword
+        })
+        // 在這裡處理註冊邏輯
+      }
+    }
+  }
 }
 </script>

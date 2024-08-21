@@ -11,7 +11,7 @@
         />
         <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size="20" />
       </div>
-      <BaseButton class="w-full sm:w-auto sm:ml-2 bg-blue-600 hover:bg-blue-700 text-white">
+      <BaseButton class="w-full sm:w-auto sm:ml-2 bg-indigo-600 text-white px-6 py-3 rounded-full font-bold hover:bg-teal-400 transition-colors duration-300">
         搜索
       </BaseButton>
     </div>
