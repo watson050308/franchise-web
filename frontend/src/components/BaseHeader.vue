@@ -26,7 +26,7 @@
       leave-to-class="opacity-0 scale-95"
     >
       <div v-show="isMenuOpen" class="sm:hidden mt-4">
-        <a href="#" class="block py-2 px-4 hover:opacity-80 transition-opacity duration-300">尋找加盟機會</a>
+        <router-link to="/exhibition" class="block py-2 px-4 hover:opacity-80 transition-opacity duration-300">尋找加盟機會</router-link>
         <a href="#" class="block py-2 px-4 hover:opacity-80 transition-opacity duration-300">加盟商支援</a>
         <a href="#" class="block py-2 px-4 hover:opacity-80 transition-opacity duration-300">關於我們</a>
         <BaseButton variant="outline" class="mt-2 w-full text-white border-white hover:opacity-80 transition-opacity duration-300">登入</BaseButton>
