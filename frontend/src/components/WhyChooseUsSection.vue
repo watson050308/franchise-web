@@ -28,7 +28,7 @@
     data() {
       return {
         reasons: [
-          { icon: Users, title: "龐大的加盟網絡", desc: "連接數千個品牌和潛在加盟商" },
+          { icon: Users, title: "龐大的加盟網路", desc: "連接數千個品牌和潛在加盟商" },
           { icon: BarChart, title: "數據驅動決策", desc: "提供詳細的市場分析和績效報告" },
           { icon: Award, title: "專業支持", desc: "全程指導，確保你的加盟成功" }
         ]

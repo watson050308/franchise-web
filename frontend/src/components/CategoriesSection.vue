@@ -7,9 +7,9 @@
           <CardTitle class="text-lg font-semibold">{{ category }}</CardTitle>
         </template>
         <template #content>
-          <a href="#" class="text-blue-600 flex items-center hover:underline">
+          <router-link to="/vendor" href="#" class="text-blue-600 flex items-center hover:underline">
             查看機會 <ChevronRight class="ml-1" :size="16" />
-          </a>
+          </router-link>
         </template>
       </BaseCard>
     </div>
