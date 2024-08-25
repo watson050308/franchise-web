@@ -1,7 +1,7 @@
-<!-- components/ui/Sidebar.vue -->
+<!-- components/ui/SideBar.vue -->
 <template>
     <div class="w-64 min-h-screen bg-gray-800 text-white p-4 flex flex-col">
-      <h1 class="text-2xl font-bold mb-8">加盟網站後台</h1>
+      <h1 class="text-2xl font-bold mb-8">後台管理</h1>
       <nav class="flex-grow">
         <button
           v-for="tab in tabs"
@@ -21,7 +21,7 @@
   import { Home, Info, Package, Award, GitBranch, Gift, MessageSquare, User } from 'lucide-vue-next';
   
   export default {
-    name: 'Sidebar',
+    name: 'SideBar',
     components: {
       Home, Info, Package, Award, GitBranch, Gift, MessageSquare, User
     },
