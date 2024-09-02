@@ -4,6 +4,7 @@ import LoginPage from '../components/LoginPage.vue'
 import AppManagement from '../AppManagement.vue'
 import ExhibitionPage from '../components/ExhibitionPage.vue'
 import BrandIntroduce from '../components/BrandIntroduce.vue'
+import ShowBrand from '../components/ShowBrand.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/vendor',
     name: 'BrandIntroduce',
     component: BrandIntroduce
+  },
+  {
+    path: '/showbrand',
+    name: 'ShowBrand',
+    component: ShowBrand
   }
 ]
 
