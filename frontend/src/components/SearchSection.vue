@@ -1,6 +1,6 @@
 <template>
   <section class="text-center mb-16">
-    <h1 class="text-3xl sm:text-4xl font-bold mb-4">找到你的理想加盟機會</h1>
+    <!-- <h1 class="text-3xl sm:text-4xl font-bold mb-4">找到你的理想加盟機會</h1>
     <p class="text-lg sm:text-xl text-gray-600 mb-8">探索數千個優質加盟品牌，開啟你的創業之旅</p>
     <div class="flex flex-col sm:flex-row justify-center items-center">
       <div class="relative w-full sm:w-auto mb-4 sm:mb-0">
@@ -14,19 +14,22 @@
       <BaseButton class="w-full sm:w-auto sm:ml-2 bg-indigo-600 text-white px-6 py-3 rounded-full font-bold hover:bg-teal-400 transition-colors duration-300">
         搜索
       </BaseButton>
-    </div>
+    </div> -->
+    <SearchBar @search="handleSearch" />
   </section>
 </template>
   
   <script>
-  import { Search } from 'lucide-vue-next'
-  import BaseButton from './ui/BaseButton.vue'
+  // import { Search } from 'lucide-vue-next'
+  // import BaseButton from './ui/BaseButton.vue'
+  import SearchBar from './ui/SearchBar.vue';
   
   export default {
     name: 'SearchSection',
     components: {
-      Search,
-      BaseButton
+      // Search,
+      SearchBar,
+      // BaseButton
     }
   }
   </script>
