@@ -1,6 +1,6 @@
 <template>
   <section class="mb-16">
-    <h2 class="text-2xl font-semibold mb-6">為什麼選擇FranchiseConnect</h2>
+    <h2 class="text-2xl font-semibold mb-6">為什麼選擇ExpoVerse</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       <BaseCard v-for="(item, index) in reasons" :key="index" class="text-center">
         <template #content>
