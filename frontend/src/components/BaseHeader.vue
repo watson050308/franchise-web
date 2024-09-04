@@ -24,7 +24,7 @@
         <!-- <router-link to="/login" class="hover:underline">登入</router-link> -->
         <!-- <a href="#" class="hover:underline">尋找加盟機會</a> -->
         <a href="#" class="hover:opacity-80 transition-opacity duration-300">展商支援</a>
-        <a href="#" class="hover:opacity-80 transition-opacity duration-300">關於我們</a>
+        <router-link to="/about-us" class="hover:opacity-80 transition-opacity duration-300">關於我們</router-link>
         <BaseButton variant="outline" class="text-white border-white hover:opacity-80 transition-opacity duration-300"><router-link to="/login" class="hover:underline">登入</router-link></BaseButton>
       </div>
       <button @click="toggleMenu" class="sm:hidden">
