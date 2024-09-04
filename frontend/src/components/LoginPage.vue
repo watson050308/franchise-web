@@ -1,7 +1,7 @@
 <template>
-  <div class="flex justify-center items-center min-h-screen bg-gradient-to-r from-indigo-100 to-teal-100 font-poppins">
+  <div class="flex justify-center items-center min-h-screen flex-grow bg-gradient-to-r from-indigo-100 to-teal-100 font-poppins">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <div class="text-2xl font-bold text-center text-indigo-600 mb-4">展覽平台</div>
+      <div class="text-2xl font-bold text-center text-indigo-600 mb-4">ExpoVerse</div>
       <h2 class="text-2xl font-semibold text-center text-indigo-600 mb-6">{{ isLogin ? '登入' : '註冊' }}</h2>
       <form @submit.prevent="handleSubmit">
         <div v-if="!isLogin" class="mb-4">
