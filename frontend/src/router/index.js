@@ -34,7 +34,7 @@ const routes = [
     component: BrandIntroduce
   },
   {
-    path: '/showbrand',
+    path: '/showbrand/:category?',
     name: 'ShowBrand',
     component: ShowBrand
   },

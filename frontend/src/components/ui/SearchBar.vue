@@ -32,9 +32,12 @@
               class="w-full bg-transparent border-none focus:outline-none"
             >
               <option value="">選擇類別</option>
-              <option value="food">餐飲</option>
+              <option v-for="option in categoryOptions" :key="option.value" :value="option.value">
+                {{ option.label }}
+              </option>
+              <!-- <option value="food">寵物展</option>
               <option value="retail">零售</option>
-              <option value="service">服務</option>
+              <option value="service">服務</option> -->
             </select>
             <!-- <ChevronDown :size="20" class="text-gray-400 ml-2" /> -->
           </div>
@@ -65,6 +68,7 @@
   <script>
   import { ref } from 'vue';
   import { Search, MapPin, DollarSign, Tag } from 'lucide-vue-next';
+import { watch } from 'vue';
   
   export default {
     name: 'CustomSearchBar',
@@ -74,12 +78,27 @@
       DollarSign,
       Tag
     },
+    props: {
+      defaultCategory: {
+        type: String,
+        default: ''
+      },
+      categoryOptions: {
+        type: Array,
+        default: () => []
+      }
+    },
     emits: ['search'],
     setup(props, { emit }) {
       const brandName = ref('');
       const region = ref('');
-      const category = ref('');
+      const category = ref(props.defaultCategory);
       const priceRange = ref('');
+
+      watch(() => props.defaultCategory, () => {
+        console.log("new value");
+        category.value = 'food';
+      });
   
       const handleSearch = () => {
         emit('search', { brandName: brandName.value, region: region.value, category: category.value, priceRange: priceRange.value });
