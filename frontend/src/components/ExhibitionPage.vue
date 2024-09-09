@@ -1,12 +1,12 @@
 <template>
-    <div class="bg-gray-50 font-poppins text-gray-800">
+    <div class="flex flex-col min-h-screen overflow-hidden">
       <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
         <ExhibitionCard v-for="exhibition in exhibitions" :key="exhibition.title" :exhibition="exhibition" />
       </main>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   import ExhibitionCard from './ui/ExhibitionCard.vue'
   import { getImage } from '@/utils/imageHelper'
   
@@ -28,4 +28,4 @@
       }
     }
   }
-  </script>
+</script>
