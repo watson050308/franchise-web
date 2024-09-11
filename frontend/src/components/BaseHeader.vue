@@ -2,7 +2,7 @@
   <header class="bg-gradient-to-r from-indigo-500 to-teal-400 text-white py-4 px-8 sm:px-6 lg:px-8">
     <nav class="flex justify-between items-center max-w-6xl mx-auto">
       <div>
-      <router-link to="/" class="text-2xl font-bold inline-block">
+      <router-link to="/expoverse" class="text-2xl font-bold inline-block">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 50" width="300" height="50">
           <defs>
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -19,7 +19,7 @@
       </router-link>
   </div>
       <div class="hidden sm:flex space-x-4 items-center">
-        <router-link to="/" class="hover:opacity-80 transition-opacity duration-300">首頁</router-link>
+        <router-link to="/expoverse" class="hover:opacity-80 transition-opacity duration-300">首頁</router-link>
         <router-link to="/exhibition" class="hover:opacity-80 transition-opacity duration-300">尋找展館</router-link>
         <!-- <router-link to="/login" class="hover:underline">登入</router-link> -->
         <!-- <a href="#" class="hover:underline">尋找加盟機會</a> -->
