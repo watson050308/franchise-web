@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import orange from '@/assets/category/redorange.png'
-import combuy from '@/assets/category/combuy.png'
+import orange from '@/assets/category/combuy.svg'
+import combuy from '@/assets/category/combuy.svg'
 
 export default {
   name: 'BaseSlide',
