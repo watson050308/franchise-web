@@ -14,7 +14,8 @@
           <circle cx="20" cy="25" r="8" fill="#ffffff" />
           <circle cx="50" cy="25" r="8" fill="#ffffff" />
           <path d="M20 25 Q35 15 50 25" fill="none" stroke="#ffffff" stroke-width="2" />
-          <text x="75" y="32" font-family="Arial, sans-serif" font-size="20" fill="#333333">ExpoVerse</text>
+          <text x="75" y="22" font-family="Arial, sans-serif" font-size="20" fill="white">展覽宇宙</text>
+          <text x="75" y="44" font-family="Arial, sans-serif" font-size="20" fill="white">ExpoVerse</text>
         </svg>
       </router-link>
   </div>
