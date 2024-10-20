@@ -1,11 +1,11 @@
 <!-- HomePage.vue -->
 <template>
   <BaseSlide />
-  <div class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8">
-    <SearchSection />
+  <div class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <CategoriesSection
       sectionTitle="熱門加盟展館" 
       :categories="franchiseCategories"
+      class="mb-16"
     />
     <CategoriesSection
       sectionTitle="熱門寵物展館" 
@@ -16,7 +16,6 @@
   
   <script>
   
-  import SearchSection from './SearchSection.vue'
   import CategoriesSection from './CategoriesSection.vue'
   import BaseSlide from './ui/BaseSlide.vue'
 
@@ -24,7 +23,6 @@
   name: 'HomePage',
   components: {
     BaseSlide,
-    SearchSection,
     CategoriesSection
   },
   data() {

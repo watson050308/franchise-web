@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-16">
+  <section>
     <h2 class="text-2xl font-semibold mb-6">{{ sectionTitle }}</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <BaseCard v-for="(category, index) in categories" :key="index" class="hover:shadow-lg transition-shadow">
