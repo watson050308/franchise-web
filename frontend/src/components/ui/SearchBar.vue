@@ -12,20 +12,6 @@
             />
           </div>
           <div class="flex-1 flex items-center border-r border-gray-300 px-4">
-            <MapPin :size="20" class="text-gray-400 mr-2" />
-            <select 
-              v-model="region"
-              class="w-full bg-transparent border-none focus:outline-none"
-            >
-              <option value="">選擇區域</option>
-              <option value="north">北部</option>
-              <option value="south">南部</option>
-              <option value="east">東部</option>
-              <option value="west">西部</option>
-            </select>
-            <!-- <ChevronDown :size="20" class="text-gray-400 ml-2" /> -->
-          </div>
-          <div class="flex-1 flex items-center border-r border-gray-300 px-4">
             <Tag :size="20" class="text-gray-400 mr-2" />
             <select
               v-model="category"
@@ -67,14 +53,14 @@
   
   <script>
   import { ref } from 'vue';
-  import { Search, MapPin, DollarSign, Tag } from 'lucide-vue-next';
+  import { Search, DollarSign, Tag } from 'lucide-vue-next';
 import { watch } from 'vue';
   
   export default {
     name: 'CustomSearchBar',
     components: {
       Search,
-      MapPin,
+      // MapPin,
       DollarSign,
       Tag
     },
