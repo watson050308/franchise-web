@@ -30,9 +30,9 @@
         <router-link to="/exhibition" class="hover:opacity-80 transition-opacity duration-300 block w-full sm:w-auto text-center">尋找展館</router-link>
         <router-link to="/brandSupport" class="hover:opacity-80 transition-opacity duration-300 block w-full sm:w-auto text-center">展商支援</router-link>
         <router-link to="/about-us" class="hover:opacity-80 transition-opacity duration-300 block w-full sm:w-auto text-center">關於我們</router-link>
-        <BaseButton variant="outline" class="text-white border-white hover:opacity-80 transition-opacity duration-300 w-full sm:w-auto">
-          <router-link to="/login" class="hover:underline">登入</router-link>
-        </BaseButton>
+        <router-link to="/login"><BaseButton variant="outline" class="text-white border-white hover:opacity-80 transition-opacity duration-300 w-full sm:w-auto">
+          <span class="hover:underline">登入</span>
+        </BaseButton></router-link>
         
         <div class="relative flex items-center" @mouseenter="showSearch = true" @mouseleave="hideSearchIfNotFocused">
           <button class="text-white hover:opacity-80 transition-opacity duration-300">
