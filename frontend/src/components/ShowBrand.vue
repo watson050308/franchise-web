@@ -52,7 +52,8 @@ import { useRoute } from 'vue-router';
           image: "/api/placeholder/400/300",
           category: "餐飲",
           initialInvestment: "NT$500萬-800萬",
-          annualRevenue: "NT$1000萬+"
+          annualRevenue: "NT$1000萬+",
+          isVerified: true
         },
         {
           id: 2,
@@ -60,7 +61,8 @@ import { useRoute } from 'vue-router';
           image: "/api/placeholder/400/300",
           category: "零售",
           initialInvestment: "NT$300萬-500萬",
-          annualRevenue: "NT$800萬+"
+          annualRevenue: "NT$800萬+",
+          isVerified: false
         },
         {
           id: 3,
@@ -68,7 +70,8 @@ import { useRoute } from 'vue-router';
           image: "/api/placeholder/400/300",
           category: "服務",
           initialInvestment: "NT$200萬-400萬",
-          annualRevenue: "NT$600萬+"
+          annualRevenue: "NT$600萬+",
+          isVerified: true
         },
         // ... 更多品牌數據
       ]);
