@@ -8,7 +8,7 @@
 
 <script>
 import { ref } from 'vue';
-import SideBar from './components/ui/SideBar.vue';
+import SideBar from './components/ui/Sidebar.vue';
 import ManageMainContent from './components/ManageMainContent.vue';
 
 export default {
