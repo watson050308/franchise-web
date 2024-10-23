@@ -18,7 +18,7 @@
     data() {
       return {
         exhibitions: [
-          { title: '加盟展', label: "franchiseExpo", description: '探索成功的商業模式，開啟你的創業之路', subcategories: ['早午餐', '咖啡廳', '手搖飲'], image: getImage('expo/franchise') },
+          { title: '加盟展', label:"franchiseExpo", description: '探索成功的商業模式，開啟你的創業之路', subcategories: ['早午餐', '咖啡廳', '手搖飲'], image: getImage('expo/franchise') },
           { title: '寵物展', label:"petExpo", description: '發現最新的寵物用品和服務，豐富毛孩生活', subcategories: ['狗狗', '貓咪', '小動物'], image: getImage('expo/pet') },
           { title: '旅遊展', label:"travelExpo", description: '探索夢想目的地，規劃你的下一次冒險', subcategories: ['國內旅遊', '國際旅遊', '主題之旅'], image: getImage('expo/travel') },
           { title: '科技展', label:"techExpo", description: '體驗最新科技，洞察未來趨勢', subcategories: ['AI', 'IoT', '綠能科技'], image: getImage('expo/tech') },
