@@ -1,101 +1,204 @@
 <template>
-  <header class="bg-gradient-to-r from-indigo-500 to-teal-400 text-white py-4 px-4 sm:px-6 lg:px-8">
-    <nav class="flex flex-col sm:flex-row justify-between items-center max-w-6xl mx-auto">
+  <header class="bg-white border-b">
+    <nav class="flex justify-between items-center max-w-7xl mx-auto px-4 py-3">
       <div class="w-full sm:w-auto flex justify-between items-center">
+        <!-- Logo -->
         <router-link to="/expoverse" class="text-2xl font-bold inline-block">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 50" width="300" height="50">
-          <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#5cb3ff;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <rect x="5" y="5" width="60" height="40" rx="20" ry="20" fill="url(#grad1)" />
-          <circle cx="20" cy="25" r="8" fill="#ffffff" />
-          <circle cx="50" cy="25" r="8" fill="#ffffff" />
-          <path d="M20 25 Q35 15 50 25" fill="none" stroke="#ffffff" stroke-width="2" />
-          <text x="75" y="22" font-family="Arial, sans-serif" font-size="20" fill="white">展覽宇宙</text>
-          <text x="75" y="44" font-family="Arial, sans-serif" font-size="20" fill="white">ExpoVerse</text>
-        </svg>
-      </router-link>
-        <button @click="toggleMenu" class="sm:hidden">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 50" width="300" height="50">
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#5cb3ff;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <rect x="5" y="5" width="60" height="40" rx="20" ry="20" fill="url(#grad1)" />
+            <circle cx="20" cy="25" r="8" fill="#ffffff" />
+            <circle cx="50" cy="25" r="8" fill="#ffffff" />
+            <path d="M20 25 Q35 15 50 25" fill="none" stroke="#ffffff" stroke-width="2" />
+            <text x="75" y="22" font-family="Arial, sans-serif" font-size="20" fill="black">展覽宇宙</text>
+            <text x="75" y="44" font-family="Arial, sans-serif" font-size="20" fill="black">ExpoVerse</text>
+          </svg>
+        </router-link>
+
+        <!-- 漢堡選單按鈕 -->
+        <button 
+          @click="toggleMenu"
+          class="md:hidden text-gray-700 hover:text-green-600 transition-colors duration-300"
+          aria-label="Toggle menu"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="h-6 w-6" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              v-if="!isMenuOpen"
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+            <path 
+              v-else
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
       
-      <div :class="['sm:flex items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-4 sm:mt-0 w-full sm:w-auto', {'hidden': !isMenuOpen, 'flex flex-col sm:flex-row': isMenuOpen}]">
-        <router-link to="/expoverse" class="hover:opacity-80 transition-opacity duration-300 block w-full sm:w-auto text-center">首頁</router-link>
-        <router-link to="/exhibition" class="hover:opacity-80 transition-opacity duration-300 block w-full sm:w-auto text-center">尋找展館</router-link>
-        <router-link to="/brandSupport" class="hover:opacity-80 transition-opacity duration-300 block w-full sm:w-auto text-center">展商支援</router-link>
-        <router-link to="/about-us" class="hover:opacity-80 transition-opacity duration-300 block w-full sm:w-auto text-center">關於我們</router-link>
-        <router-link to="/login"><BaseButton variant="outline" class="text-white border-white hover:opacity-80 transition-opacity duration-300 w-full sm:w-auto">
-          <span class="hover:underline">登入</span>
-        </BaseButton></router-link>
-        
-        <div class="relative flex items-center" @mouseenter="showSearch = true" @mouseleave="hideSearchIfNotFocused">
-          <button class="text-white hover:opacity-80 transition-opacity duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
-          <div 
-          class="overflow-hidden transition-all duration-300 ease-in-out flex items-center"
-            :class="showSearch ? 'w-64 opacity-100 px-2' : 'w-0 opacity-0 px-0'"
+      <div class="flex-grow flex justify-end items-center">
+        <!-- 主導航選單 -->
+        <div class="hidden md:flex items-center space-x-8">
+          <router-link 
+            v-for="item in menuItems.filter(item => item.name !== '登入')" 
+            :key="item.path"
+            :to="item.path"
+            class="text-gray-700 hover:text-green-600 transition-colors duration-300"
           >
+            {{ item.name }}
+          </router-link>
+        </div>
+
+        <!-- 右側工具列 -->
+        <div class="hidden md:flex items-center ml-8">
+          <!-- 搜索按鈕和搜索框 -->
+          <div class="relative mr-8">
+            <button 
+              @click="toggleSearch"
+              class="text-gray-700 hover:text-green-600 transition-colors duration-300"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+            
+            <!-- 搜索框 -->
+            <div v-if="isSearchOpen" 
+                class="absolute right-0 top-full mt-2 w-64 bg-white rounded-lg shadow-lg p-2 z-50">
+              <input
+                type="text"
+                v-model="searchQuery"
+                @keyup.enter="performSearch"
+                @input="handleSearchInput"
+                @blur="handleBlur"
+                placeholder="搜索..."
+                class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-600"
+                ref="searchInput"
+              />
+              <!-- 搜索建議 -->
+              <div v-if="showSuggestions && filteredBrands.length > 0" 
+                  class="mt-2">
+                <ul>
+                  <li v-for="brand in filteredBrands" 
+                      :key="brand.name"
+                      @mousedown="selectBrand(brand.name)"
+                      class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700">
+                    {{ brand.name }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 登入按鈕 -->
+          <router-link 
+            to="/login"
+            class="text-gray-700 hover:text-green-600 transition-colors duration-300"
+          >
+            登入
+          </router-link>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 行動裝置選單 -->
+    <transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="transform -translate-y-full opacity-0"
+      enter-to-class="transform translate-y-0 opacity-100"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="transform translate-y-0 opacity-100"
+      leave-to-class="transform -translate-y-full opacity-0"
+    >
+      <div 
+        v-show="isMenuOpen" 
+        class="md:hidden border-t bg-white absolute w-full z-50 shadow-lg"
+      >
+        <div class="px-4 py-2">
+          <router-link 
+            v-for="item in menuItems" 
+            :key="item.path"
+            :to="item.path"
+            class="block py-2 text-gray-700 hover:text-green-600"
+            @click="isMenuOpen = false"
+          >
+            {{ item.name }}
+          </router-link>
+        </div>
+
+        <!-- 行動裝置搜索框 -->
+        <div class="px-4 pb-4">
+          <div class="relative">
             <input
               type="text"
               v-model="searchQuery"
               @keyup.enter="performSearch"
-              @focus="showSuggestions = true"
-              @blur="hideSuggestionsDelayed"
+              @input="handleSearchInput"
               placeholder="搜索..."
-              class="w-full px-4 py-2 text-gray-700 bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-600"
             />
-            <div v-if="showSuggestions && filteredBrands.length > 0" class="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+            <!-- 搜索建議 -->
+            <div v-if="showSuggestions && filteredBrands.length > 0" 
+                  class="mt-2 bg-white rounded-lg shadow-lg">
               <ul>
-                <li 
-                  v-for="brand in filteredBrands" 
-                  :key="brand.name" 
-                  @mousedown="selectBrand(brand.name)"
-                  class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700 flex items-center"
-                >
-                  <img :src="brand.logo" :alt="brand.name" class="w-8 h-8 mr-3 object-contain" />
-                  <span>{{ brand.name }}</span>
+                <li v-for="brand in filteredBrands" 
+                    :key="brand.name"
+                    @mousedown="selectBrand(brand.name)"
+                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700">
+                    {{ brand.name }}
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-    </nav>
+    </transition>
   </header>
 </template>
 
 <script>
-import { ref, computed } from 'vue';
-import BaseButton from './ui/BaseButton.vue';
+import { ref, computed, nextTick} from 'vue';
 
 export default {
   name: 'BaseHeader',
-  components: {
-    BaseButton
-  },
   setup() {
     const isMenuOpen = ref(false);
+    const isSearchOpen = ref(false);
     const searchQuery = ref('');
-    const showSearch = ref(false);
     const showSuggestions = ref(false);
+    const searchInput = ref(null);
 
-    // 品牌列表，包含名稱和 logo URL
+    const menuItems = [
+      { name: '首頁', path: '/expoverse' },
+      { name: '尋找展館', path: '/exhibition' },
+      { name: '展商支援', path: '/brandSupport' },
+      { name: '聯絡我們', path: '/about-us' },
+      { name: '登入', path: '/login' },
+    ];
+
     const brands = [
-      { name: '紅橘子', logo: '../assets/category/redorange.png' },
-      { name: '紅吉子', logo: '../assets/category/redorange.png' },
-      { name: '紅柿子', logo: '../assets/category/redorange.png' },
+      { name: '紅橘子' },
+      { name: '紅吉子' },
+      { name: '紅柿子' },
     ];
 
     const filteredBrands = computed(() => {
+      if (!searchQuery.value) return [];
       return brands.filter(brand => 
         brand.name.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
@@ -103,58 +206,54 @@ export default {
 
     const toggleMenu = () => {
       isMenuOpen.value = !isMenuOpen.value;
-      if (!isMenuOpen.value) {
-        showSearch.value = false;
-      }
     };
 
     const toggleSearch = () => {
-      showSearch.value = !showSearch.value;
-      if (showSearch.value) {
-        showSuggestions.value = true;
+      isSearchOpen.value = !isSearchOpen.value;
+      if (isSearchOpen.value) {
+        nextTick(() => {
+          searchInput.value?.focus();
+        });
       }
+    };
+
+    const handleSearchInput = () => {
+      showSuggestions.value = true;
     };
 
     const performSearch = () => {
       console.log('Searching for:', searchQuery.value);
+      isSearchOpen.value = false;
       showSuggestions.value = false;
-      showSearch.value = false;
     };
 
-    const hideSearchIfNotFocused = () => {
+    const handleBlur = () => {
       setTimeout(() => {
-        if (!showSuggestions.value) {
-          showSearch.value = false;
-        }
-      }, 200);
-    };
-
-    const hideSuggestionsDelayed = () => {
-      setTimeout(() => {
+        isSearchOpen.value = false;
         showSuggestions.value = false;
       }, 200);
     };
 
     const selectBrand = (brandName) => {
       searchQuery.value = brandName;
-      showSuggestions.value = false;
-      showSearch.value = false;
       performSearch();
     };
 
-    return { 
-      isMenuOpen, 
-      toggleMenu, 
-      searchQuery, 
-      performSearch, 
-      showSearch, 
+    return {
+      isMenuOpen,
+      isSearchOpen,
+      searchQuery,
       showSuggestions,
+      searchInput,
+      menuItems,
       filteredBrands,
-      hideSearchIfNotFocused,
-      hideSuggestionsDelayed,
-      selectBrand,
-      toggleSearch
+      toggleMenu,
+      toggleSearch,
+      handleSearchInput,
+      performSearch,
+      handleBlur,
+      selectBrand
     };
   }
-}
+};
 </script>
