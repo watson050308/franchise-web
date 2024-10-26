@@ -14,12 +14,12 @@
   </div>
 </template>
   
-  <script>
-  
-  import CategoriesSection from './CategoriesSection.vue'
-  import BaseSlide from './ui/BaseSlide.vue'
+<script>
 
-  export default {
+import CategoriesSection from './CategoriesSection.vue'
+import BaseSlide from './ui/BaseSlide.vue'
+
+export default {
   name: 'HomePage',
   components: {
     BaseSlide,
@@ -39,5 +39,4 @@
     }
   }
 }
-  
-  </script>
+</script>

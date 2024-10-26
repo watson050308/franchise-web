@@ -15,9 +15,9 @@
     </div>
   </template>
   
-  <script>
-  export default {
-    name: 'PreviewModal',
-    emits: ['close']
-  };
-  </script>
+<script>
+export default {
+  name: 'PreviewModal',
+  emits: ['close']
+};
+</script>

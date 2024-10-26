@@ -9,19 +9,19 @@
         </BaseButton>
       </section>
     </div>
-    </template>
+</template>
     
-    <script>
-    
-    import WhyChooseUsSection from './WhyChooseUsSection.vue'
-    import BaseButton from './ui/BaseButton.vue'
-  
-    export default {
-    name: 'AboutUsPage',
-    components: {
-      WhyChooseUsSection,
-      BaseButton
-    }
-  }
-    
-    </script>
+<script>
+
+import WhyChooseUsSection from './WhyChooseUsSection.vue'
+import BaseButton from './ui/BaseButton.vue'
+
+export default {
+  name: 'AboutUsPage',
+  components: {
+    WhyChooseUsSection,
+    BaseButton
+}
+}
+
+</script>

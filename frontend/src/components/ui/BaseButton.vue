@@ -11,14 +11,14 @@
   </button>
 </template>
   
-  <script>
-  export default {
-    name: 'BaseButton',
-    props: {
-      variant: {
-        type: String,
-        default: 'default'
-      }
+<script>
+export default {
+  name: 'BaseButton',
+  props: {
+    variant: {
+      type: String,
+      default: 'default'
     }
   }
-  </script>
+}
+</script>

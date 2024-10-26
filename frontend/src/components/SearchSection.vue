@@ -19,17 +19,17 @@
   </section>
 </template>
   
-  <script>
-  // import { Search } from 'lucide-vue-next'
-  // import BaseButton from './ui/BaseButton.vue'
-  import SearchBar from './ui/SearchBar.vue';
-  
-  export default {
-    name: 'SearchSection',
-    components: {
-      // Search,
-      SearchBar,
-      // BaseButton
-    }
+<script>
+// import { Search } from 'lucide-vue-next'
+// import BaseButton from './ui/BaseButton.vue'
+import SearchBar from './ui/SearchBar.vue';
+
+export default {
+  name: 'SearchSection',
+  components: {
+    // Search,
+    SearchBar,
+    // BaseButton
   }
-  </script>
+}
+</script>

@@ -9,19 +9,19 @@
     </div>
   </template>
   
-  <script>
-  import BrandCard from './BrandCard.vue';
-  
-  export default {
-    name: 'BrandGrid',
-    components: {
-      BrandCard
-    },
-    props: {
-      brands: {
-        type: Array,
-        required: true
-      }
+<script>
+import BrandCard from './BrandCard.vue';
+
+export default {
+  name: 'BrandGrid',
+  components: {
+    BrandCard
+  },
+  props: {
+    brands: {
+      type: Array,
+      required: true
     }
-  };
-  </script>
+  }
+};
+</script>
