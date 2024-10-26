@@ -7,9 +7,23 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    defaults:
+        run:
+          working-directory: frontend  # set the default workflow path
 
     steps:
       - uses: actions/checkout@v4
+    
+      - name: Check directory structure
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "\nDirectory contents:"
+          ls -la
+          echo "\nComponents directory contents:"
+          ls -la src/components/ui || echo "UI directory not found"
+          echo "\nFull tree structure:"
+          tree src/components || echo "Tree command not found"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
