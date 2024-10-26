@@ -28,16 +28,20 @@ export default {
       imageSrc: ''
     }
   },
-  mounted() {
+  created() {
     this.loadImage()
   },
   methods: {
     async loadImage() {
-      if (typeof this.exhibition.image === 'function') {
-        const { default: src } = await this.exhibition.image()
-        this.imageSrc = src
-      } else {
-        this.imageSrc = this.exhibition.image
+      try {
+        if (typeof this.exhibition.image === 'function') {
+          const { default: src } = await this.exhibition.image()
+          this.imageSrc = src
+        } else {
+          this.imageSrc = this.exhibition.image
+        }
+      } catch (error) {
+        console.error('Error loading image:', error)
       }
     }
   }
