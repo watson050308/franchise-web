@@ -8,8 +8,8 @@
 
 <script>
 import { ref } from 'vue';
-import SideBar from './components/ui/SideBar.vue';
-import ManageMainContent from './components/ManageMainContent.vue';
+import SideBar from '@/components/ui/SideBar.vue';
+import ManageMainContent from '@/components/ManageMainContent.vue';
 
 export default {
   name: 'AppManagement',

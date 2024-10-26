@@ -51,52 +51,52 @@
     </div>
   </template>
   
-  <script>
-  import { ref } from 'vue';
-  import { Search, DollarSign, Tag } from 'lucide-vue-next';
+<script>
+import { ref } from 'vue';
+import { Search, DollarSign, Tag } from 'lucide-vue-next';
 import { watch } from 'vue';
   
-  export default {
-    name: 'CustomSearchBar',
-    components: {
-      Search,
-      // MapPin,
-      DollarSign,
-      Tag
+export default {
+  name: 'CustomSearchBar',
+  components: {
+    Search,
+    // MapPin,
+    DollarSign,
+    Tag
+  },
+  props: {
+    defaultCategory: {
+      type: String,
+      default: ''
     },
-    props: {
-      defaultCategory: {
-        type: String,
-        default: ''
-      },
-      categoryOptions: {
-        type: Array,
-        default: () => []
-      }
-    },
-    emits: ['search'],
-    setup(props, { emit }) {
-      const brandName = ref('');
-      const region = ref('');
-      const category = ref(props.defaultCategory);
-      const priceRange = ref('');
-
-      watch(() => props.defaultCategory, () => {
-        console.log("new value");
-        category.value = 'food';
-      });
-  
-      const handleSearch = () => {
-        emit('search', { brandName: brandName.value, region: region.value, category: category.value, priceRange: priceRange.value });
-      };
-  
-      return {
-        brandName,
-        region,
-        category,
-        priceRange,
-        handleSearch
-      };
+    categoryOptions: {
+      type: Array,
+      default: () => []
     }
-  };
-  </script>
+  },
+  emits: ['search'],
+  setup(props, { emit }) {
+    const brandName = ref('');
+    const region = ref('');
+    const category = ref(props.defaultCategory);
+    const priceRange = ref('');
+
+    watch(() => props.defaultCategory, () => {
+      console.log("new value");
+      category.value = 'food';
+    });
+
+    const handleSearch = () => {
+      emit('search', { brandName: brandName.value, region: region.value, category: category.value, priceRange: priceRange.value });
+    };
+
+    return {
+      brandName,
+      region,
+      category,
+      priceRange,
+      handleSearch
+    };
+  }
+};
+</script>

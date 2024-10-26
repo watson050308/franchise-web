@@ -6,13 +6,13 @@
   </footer>
 </template>
   
-  <script>
-  export default {
-    name: 'BaseFooter',
-    computed: {
-      currentYear() {
-        return new Date().getFullYear()
-      }
+<script>
+export default {
+  name: 'BaseFooter',
+  computed: {
+    currentYear() {
+      return new Date().getFullYear()
     }
   }
-  </script>
+}
+</script>

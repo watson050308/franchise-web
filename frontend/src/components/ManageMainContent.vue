@@ -16,39 +16,39 @@
     </div>
   </template>
   
-  <script>
-  import { ref, computed } from 'vue';
-  import { Eye } from 'lucide-vue-next';
-  import VendorInfoForm from './ui/VendorInfoForm.vue';
-  import PreviewModal from './ui/PreviewModal.vue';
-  
-  export default {
-    name: 'ManageMainContent',
-    components: {
-      Eye,
-      VendorInfoForm,
-      PreviewModal
-    },
-    props: ['activeTab'],
-    setup(props) {
-      const isPreviewOpen = ref(false);
-  
-      const currentTabComponent = computed(() => {
-        switch (props.activeTab) {
-          case '廠商資訊':
-            return VendorInfoForm;
-          default:
-            return {
-              template: `<p>這裡是 {{ activeTab }} 的內容編輯區域</p>`,
-              props: ['activeTab']
-            };
-        }
-      });
-  
-      return {
-        isPreviewOpen,
-        currentTabComponent
-      };
-    }
-  };
-  </script>
+<script>
+import { ref, computed } from 'vue';
+import { Eye } from 'lucide-vue-next';
+import VendorInfoForm from './ui/VendorInfoForm.vue';
+import PreviewModal from './ui/PreviewModal.vue';
+
+export default {
+  name: 'ManageMainContent',
+  components: {
+    Eye,
+    VendorInfoForm,
+    PreviewModal
+  },
+  props: ['activeTab'],
+  setup(props) {
+    const isPreviewOpen = ref(false);
+
+    const currentTabComponent = computed(() => {
+      switch (props.activeTab) {
+        case '廠商資訊':
+          return VendorInfoForm;
+        default:
+          return {
+            template: `<p>這裡是 {{ activeTab }} 的內容編輯區域</p>`,
+            props: ['activeTab']
+          };
+      }
+    });
+
+    return {
+      isPreviewOpen,
+      currentTabComponent
+    };
+  }
+};
+</script>
