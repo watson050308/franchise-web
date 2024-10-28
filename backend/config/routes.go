@@ -30,6 +30,7 @@ func InitRouter() *gin.Engine {
 	api := routes.Group("/api/v1")
 	{
 		api.GET("/ping", controllers.TestController)
+		api.POST("/signup", controllers.CreateUser)
 	}
 
 	return routes
