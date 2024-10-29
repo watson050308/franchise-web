@@ -1,14 +1,19 @@
 package initializers
 
 import (
+	"context"
 	"fmt"
 	"log"
 
+	"github.com/go-redis/redis/v8"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
+var (
+	DB  *gorm.DB
+	Rdb *redis.Client
+)
 
 func ConnectToDB() {
 	var err error
@@ -39,4 +44,31 @@ func ConnectToDB() {
 	}
 
 	fmt.Println("Connected to PostgreSQL successfully!")
+}
+
+func ConnectToRedis() {
+	ctx := context.Background()
+
+	Rdb = redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
+		Password: "",
+		DB:       0,
+	})
+
+	err := Rdb.Ping(ctx).Err()
+	if err != nil {
+		log.Fatal("Could not connect to Redis:", err)
+	}
+
+	err = Rdb.Set(ctx, "key", "value", 0).Err()
+	if err != nil {
+		log.Fatal("Could not set key:", err)
+	}
+
+	val, err := Rdb.Get(ctx, "key").Result()
+	if err != nil {
+		log.Fatal("Could not get key:", err)
+	}
+	fmt.Println("key:", val)
+	fmt.Println("Connected to Redis successfully!")
 }

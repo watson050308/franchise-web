@@ -40,6 +40,7 @@ func InitRouter() *gin.Engine {
 			mid.AuthMiddleware(),
 		)
 		{
+			auth.DELETE("/logout", admin.Logout)
 			auth.GET("/test", func(c *gin.Context) {
 				c.JSON(http.StatusOK, gin.H{
 					"message": "pong",

@@ -20,6 +20,7 @@ func init() {
 	}
 
 	initializers.ConnectToDB()
+	initializers.ConnectToRedis()
 }
 
 // @title Web API

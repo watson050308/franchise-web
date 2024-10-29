@@ -1,10 +1,13 @@
 package middleware
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"strings"
+
+	authHelper "franchise-web/app/helper/admin"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
@@ -43,6 +46,14 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
+		tokenID, err := parseTokenID(tokenString)
+		log.Println(tokenID)
+		if err != nil || authHelper.IsTokenBlacklisted(tokenID) {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			c.Abort()
+			return
+		}
+
 		// Get claims from token
 		if claims, ok := token.Claims.(jwt.MapClaims); ok {
 			c.Set("claims", claims)
@@ -55,4 +66,28 @@ func AuthMiddleware() gin.HandlerFunc {
 
 		c.Next()
 	}
+}
+
+func parseTokenID(tokenString string) (string, error) {
+	jwtSecret := os.Getenv("SECRET_KEY")
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return []byte(jwtSecret), nil
+	})
+	if err != nil {
+		return "", err
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok || !token.Valid {
+		return "", fmt.Errorf("invalid token")
+	}
+
+	if tokenID, ok := claims["jti"].(string); ok {
+		return tokenID, nil
+	}
+
+	return "", fmt.Errorf("token ID not found")
 }
