@@ -1,11 +1,13 @@
 package routes
 
 import (
-	"franchise-web/app/controllers"
+	"net/http"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
+	admin "franchise-web/app/controllers/admin"
+	mid "franchise-web/app/middlewares"
 	_ "franchise-web/docs"
 
 	swaggerFiles "github.com/swaggo/files"
@@ -27,10 +29,23 @@ func InitRouter() *gin.Engine {
 		ginSwagger.WrapHandler(swaggerFiles.Handler,
 			url,
 		))
+
 	api := routes.Group("/api/v1")
 	{
-		api.GET("/ping", controllers.TestController)
-		api.POST("/signup", controllers.CreateUser)
+		api.POST("/login", admin.Login)
+		api.POST("/register", admin.Register)
+
+		auth := api.Group("/")
+		auth.Use(
+			mid.AuthMiddleware(),
+		)
+		{
+			auth.GET("/test", func(c *gin.Context) {
+				c.JSON(http.StatusOK, gin.H{
+					"message": "pong",
+				})
+			})
+		}
 	}
 
 	return routes

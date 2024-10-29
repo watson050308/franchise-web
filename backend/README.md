@@ -22,3 +22,8 @@ $ mkdir -p db/migrations
 $ migrate create -ext sql -dir db/migrations create_user_table
 $ migrate -path db/migrations -database "postgres://username:passname@localhost:5432/database_name?sslmode=disable" up
 ```
+
+## API doc
+
+How to see api doc?
+<http://localhost:8080/swagger/index.html#/>

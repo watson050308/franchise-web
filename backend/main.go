@@ -5,6 +5,8 @@ import (
 	"franchise-web/config/initializers"
 	"log"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func init() {
@@ -12,6 +14,11 @@ func init() {
 	appIP := os.Getenv("HOST")
 	appPort := os.Getenv("PORT")
 	log.Printf("appIP: %s, appPort: %s", appIP, appPort)
+
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	initializers.ConnectToDB()
 }
 
