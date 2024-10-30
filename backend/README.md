@@ -27,3 +27,30 @@ $ migrate -path db/migrations -database "postgres://username:passname@localhost:
 
 How to see api doc?
 <http://localhost:8080/swagger/index.html#/>
+
+## Start Go server
+
+### Step 1: Create the Directory for Docker Data
+
+First, create a `docker_data` folder in the root directory. When you start docker-compose.data, the data will be saved locally, even if you delete docker-compose.data.
+
+```command
+mkdir ~/docker_date
+```
+
+### Step 2: Create a Docker Network
+
+Create a custom Docker network that your containers can use to communicate with each other.
+
+```command
+docker network create franchise_web_network
+```
+
+### Step 3: Create Docker Compose Files
+
+You’ll need two Docker Compose files to manage your application and database services. Now, create two Docker Compose files: `docker-compose.data` and `docker-compose.app`.
+
+```command
+docker-compose -f docker-compose.data.yaml -p franchise_database up -d
+docker-compose -f docker-compose.app.yaml -p franchise_web up -d
+```

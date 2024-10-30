@@ -1,4 +1,3 @@
-version: '3'
 services:
   postgres:
     image: postgres:13
@@ -6,11 +5,12 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: mydb
     volumes:
       - ~/docker_data/postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - franchise_web_network
 
   pgadmin:
     image: dpage/pgadmin4
@@ -22,6 +22,8 @@ services:
       - "8000:80"
     depends_on:
       - postgres
+    networks:
+      - franchise_web_network
 
   redis:
     image: redis:latest
@@ -30,15 +32,19 @@ services:
       - "6379:6379"
     volumes:
       - ~/docker_data/redis:/data
+    networks:
+      - franchise_web_network
 
   redisinsight:
-      image: redislabs/redisinsight:latest
-      container_name: redisinsight
-      ports:
-        - "5540:5540"
-      depends_on:
-        - redis
+    image: redislabs/redisinsight:latest
+    container_name: redisinsight
+    ports:
+      - "5540:5540"
+    depends_on:
+      - redis
+    networks:
+      - franchise_web_network
 
-volumes:
-  postgres_data:
-  redis_data:
+networks:
+  franchise_web_network:
+    external: true
