@@ -80,11 +80,18 @@ func ConnectToDB() {
 
 	log.Printf("Connected to '%s' database successfully!\n", dbName)
 
-	applyMigrations()
+	applyMigrations(dbName)
 
 }
 
-func applyMigrations() {
+func applyMigrations(dbName string) {
+	fileUrl := func() string {
+		if dbName == "production" {
+			return "file:///root/db/migrations"
+		}
+		return "file://../backend/db/migrations"
+	}()
+
 	sqlDB, err := DB.DB()
 	if err != nil {
 		log.Fatalf("failed to get database instance: %v", err)
@@ -100,7 +107,7 @@ func applyMigrations() {
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://../backend/db/migrations",
+		fileUrl,
 		"postgres", driver)
 	if err != nil {
 		log.Fatalf("migration setup failed: %v", err)
