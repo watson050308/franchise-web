@@ -2,7 +2,9 @@ package controllers
 
 import (
 	"fmt"
+	"franchise-web/app/helper"
 	authHelper "franchise-web/app/helper/admin"
+
 	model "franchise-web/app/models"
 	data "franchise-web/config/initializers"
 	"os"
@@ -189,4 +191,76 @@ func parseTokenID(tokenString string) (string, error) {
 	}
 
 	return "", fmt.Errorf("token ID not found")
+}
+
+// Edit user godoc
+// @Summary      Get a User
+// @Description  Clear the authentication token and log out the User
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Success 200  {object} services.SuccessfulLogoutResponse "Logged out successfully"
+// @Router       /api/v1/user/id/edit [get]
+func EditUser(c *gin.Context) {
+	user, err := helper.FindUserByID(c)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": "User not found",
+		})
+	}
+
+	userInfo := map[string]interface{}{
+		"id":    user.ID,
+		"name":  user.Name,
+		"email": user.Email,
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"user": userInfo,
+	})
+}
+
+// Update User godoc
+// @Summary      Update a User
+// @Description  Clear the authentication token and log out the User
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Success 200  {object} services.SuccessfulLogoutResponse "Logged out successfully"
+// @Router       /api/v1/user/id [patch]
+func UpdateUser(c *gin.Context) {
+	var request struct {
+		Name     string `json:"name"`
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	user, err := helper.FindUserByID(c)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": "User not found",
+		})
+		return
+	}
+
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Bad request data",
+		})
+		return
+	}
+
+	user.Name = request.Name
+	user.Email = request.Email
+
+	if err := data.DB.Save(&user).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Failed to update user",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "User updated successfully",
+	})
 }

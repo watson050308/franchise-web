@@ -41,6 +41,9 @@ func InitRouter() *gin.Engine {
 		)
 		{
 			auth.DELETE("/logout", admin.Logout)
+			auth.GET("/user/:id/edit", admin.EditUser)
+			auth.PATCH("/user/:id", admin.UpdateUser)
+
 			auth.GET("/test", func(c *gin.Context) {
 				c.JSON(http.StatusOK, gin.H{
 					"message": "pong",
