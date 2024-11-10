@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webapp
+    environment:
+      ENV: docker
+      DATABASE_URL: postgres://admin:admin123@postgres:5432/mydb
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "8080:8080"
+    networks:
+      - franchise_web_network
+
+networks:
+  franchise_web_network:
+    external: true

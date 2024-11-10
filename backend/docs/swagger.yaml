@@ -1,0 +1,165 @@
+basePath: /
+definitions:
+  services.BadRequest:
+    properties:
+      code:
+        example: 400
+        type: integer
+      error:
+        example: Incorrect email
+        type: string
+    type: object
+  services.HttpError:
+    properties:
+      code:
+        example: 401
+        type: integer
+      error:
+        example: Incorrect email
+        type: string
+    type: object
+  services.LoginRequest:
+    properties:
+      email:
+        example: test@email.com
+        type: string
+      password:
+        example: "12345"
+        type: string
+    type: object
+  services.RegisterRequest:
+    properties:
+      email:
+        example: test@email.com
+        type: string
+      name:
+        example: User's name
+        type: string
+      password:
+        example: "12345"
+        type: string
+    type: object
+  services.ServerError:
+    properties:
+      code:
+        example: 500
+        type: integer
+      error:
+        example: Error generating token
+        type: string
+    type: object
+  services.SuccessfulLoginResponse:
+    properties:
+      message:
+        example: User login successfully
+        type: string
+      token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRC
+        type: string
+    type: object
+  services.SuccessfulLogoutResponse:
+    properties:
+      message:
+        example: Logged out successfully
+        type: string
+    type: object
+  services.SuccessfulSignup:
+    properties:
+      message:
+        example: User registered successfully
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server.
+  title: Web API
+  version: "1.0"
+paths:
+  /api/v1/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate a user and generate a JWT token
+      parameters:
+      - description: User credentials
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/services.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful login response
+          schema:
+            $ref: '#/definitions/services.SuccessfulLoginResponse'
+        "401":
+          description: Incorrect email or password
+          schema:
+            $ref: '#/definitions/services.HttpError'
+        "500":
+          description: Error generating token
+          schema:
+            $ref: '#/definitions/services.ServerError'
+      summary: Login
+      tags:
+      - User
+  /api/v1/logout:
+    delete:
+      consumes:
+      - application/json
+      description: Clear the authentication token and log out the User
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Logged out successfully
+          schema:
+            $ref: '#/definitions/services.SuccessfulLogoutResponse'
+      summary: Logout a User
+      tags:
+      - User
+  /api/v1/ping:
+    get:
+      consumes:
+      - application/json
+      description: test
+      produces:
+      - application/json
+      responses: {}
+      summary: Test
+      tags:
+      - Test
+  /api/v1/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new User with the provided credentials
+      parameters:
+      - description: User information
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/services.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User registered successfully
+          schema:
+            $ref: '#/definitions/services.SuccessfulSignup'
+        "400":
+          description: Bad request response
+          schema:
+            $ref: '#/definitions/services.BadRequest'
+        "500":
+          description: Internal server error response
+          schema:
+            $ref: '#/definitions/services.ServerError'
+      summary: Register a new User
+      tags:
+      - User
+swagger: "2.0"

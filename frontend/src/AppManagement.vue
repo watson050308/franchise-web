@@ -7,26 +7,26 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import SideBar from '@/components/ui/SideBar.vue';
-import ManageMainContent from '@/components/ManageMainContent.vue';
+import { ref } from "vue";
+import SideBar from "@/components/ui/SideBar.vue";
+import ManageMainContent from "@/components/ManageMainContent.vue";
 
 export default {
-  name: 'AppManagement',
+  name: "AppManagement",
   components: {
     SideBar,
-    ManageMainContent
+    ManageMainContent,
   },
   setup() {
-    const activeTab = ref('主頁');
+    const activeTab = ref("主頁");
     const setActiveTab = (tab) => {
       activeTab.value = tab;
     };
 
     return {
       activeTab,
-      setActiveTab
+      setActiveTab,
     };
-  }
+  },
 };
 </script>
