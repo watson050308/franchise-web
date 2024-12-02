@@ -9,7 +9,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  base: '/franchise-web',
+  base: '/',
   server: {
     port: 5173,
     // open: true // auto open the web

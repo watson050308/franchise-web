@@ -3,7 +3,7 @@
     <nav class="flex justify-between items-center max-w-7xl mx-auto px-4 py-3">
       <div class="w-full sm:w-auto flex justify-between items-center">
         <!-- Logo -->
-        <router-link to="/expoverse" class="text-2xl font-bold inline-block">
+        <router-link to="/" class="text-2xl font-bold inline-block">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 50" width="300" height="50">
             <defs>
               <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -184,7 +184,7 @@ export default {
     const searchInput = ref(null);
 
     const menuItems = [
-      { name: '首頁', path: '/expoverse' },
+      { name: '首頁', path: '/' },
       { name: '尋找展館', path: '/exhibition' },
       { name: '展商支援', path: '/brandSupport' },
       { name: '聯絡我們', path: '/about-us' },
