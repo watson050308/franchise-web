@@ -10,7 +10,7 @@ import AboutUsPage from '../components/AboutUsPage.vue'
 
 const routes = [
   {
-    path: '/expoverse',
+    path: '/',
     name: 'HomePage',
     component: HomePage
   },
