@@ -1,5 +1,5 @@
 import { ApiResponse } from '@/types/auth';
-import { LoginForm, RegisterForm } from '@/types/auth';
+import { LoginForm, RegisterForm, User } from '@/types/auth';
 import axiosInstance from '../axios';
 
 export const authApi = {
@@ -14,11 +14,27 @@ export const authApi = {
   },
 
   register: async (data: RegisterForm): Promise<ApiResponse<User>> => {
-    const response = await axiosInstance.post<ApiResponse<User>>('/api/v1/register', {
-      name: data.name,
-      email: data.email,
-      password: data.password
-    });
-    return response.data;
+    try {
+      const response = await axiosInstance.post<ApiResponse<User>>('/api/v1/register', {
+        name: data.name,
+        email: data.email,
+        password: data.password
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Register error:', error);    
+      throw error;
+    }
+  },
+
+  logout: async () => {
+    try {
+      const response = await axiosInstance.delete('/api/v1/logout');
+      localStorage.removeItem('token');
+      return response.data;
+    } catch (error) {
+      console.error('Logout error:', error);
+      throw error;
+    }
   }
 };
