@@ -5,8 +5,8 @@
 ```Command
 $ go install github.com/cosmtrek/air@latest
 $ air -v
-  __    _   ___  
- / /\  | | | |_) 
+  __    _   ___
+ / /\  | | | |_)
 /_/--\ |_| |_| \_ v1.48.0, built with Go go1.22.2
 ```
 
@@ -54,3 +54,12 @@ You’ll need two Docker Compose files to manage your application and database s
 docker-compose -f docker-compose.data.yaml -p franchise_database up -d
 docker-compose -f docker-compose.app.yaml -p franchise_web up -d
 ```
+
+### Step 4: Contecct to Dasebase
+
+If you use Docker to connect to the web app, please connect to the production database.
+pdAdmin: <http://localhost:8000/browser/>
+Name:
+![Name](docs/name.png)
+Host Name
+![Host name](docs/host_name.png)

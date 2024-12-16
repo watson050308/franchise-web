@@ -97,7 +97,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	if err := data.DB.Where("email=?", user.Email).First(&foundUser).Error; err != nil {
+	if err := data.DB.Where("user_email=?", user.Email).First(&foundUser).Error; err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"error": "Incorrect email",
 		})

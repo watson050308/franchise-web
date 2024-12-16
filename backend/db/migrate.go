@@ -1,7 +1,6 @@
 package main
 
 import (
-	model "franchise-web/app/models"
 	"franchise-web/config/initializers"
 )
 
@@ -10,5 +9,5 @@ func init() {
 }
 
 func main() {
-	initializers.DB.Migrator().DropTable(&model.User{})
+	// initializers.DB.Migrator().DropTable(&model.User{})
 }

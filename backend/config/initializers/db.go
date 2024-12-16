@@ -37,11 +37,12 @@ func ConnectToDB() {
 	}
 
 	dsn := fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=postgres sslmode=disable TimeZone=Asia/Taipei",
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable TimeZone=Asia/Taipei",
 		dbHost,
 		dbPort,
 		dbUser,
 		dbPassword,
+		dbName,
 	)
 
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
