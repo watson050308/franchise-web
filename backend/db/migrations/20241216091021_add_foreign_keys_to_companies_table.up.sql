@@ -1,0 +1,9 @@
+ALTER TABLE companies
+ADD CONSTRAINT fk_brand FOREIGN KEY (brand_id) REFERENCES brands (id)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL;
+
+ALTER TABLE brands
+ADD CONSTRAINT fk_industry FOREIGN KEY (industry_id) REFERENCES industries (id)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL;
