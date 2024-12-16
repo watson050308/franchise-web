@@ -6,7 +6,7 @@ services:
     container_name: webapp
     environment:
       ENV: docker
-      DATABASE_URL: postgres://admin:admin123@postgres:5432/mydb
+      DATABASE_URL: postgres://admin:admin123@postgres:5432/production
       REDIS_URL: redis://redis:6379
     ports:
       - "8080:8080"
