@@ -2,7 +2,11 @@
 <template>
     <div class="flex-1 p-8">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold">{{ activeTab }}</h2>
+        <h2 class="text-2xl font-bold">{{ activeTab }}</h2><br>
+        <div>
+          {{ activeTab }}
+          
+        </div>
         <button
           class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded flex items-center"
           @click="isPreviewOpen = true"
@@ -21,6 +25,7 @@ import { ref, computed } from 'vue';
 import { Eye } from 'lucide-vue-next';
 import VendorInfoForm from './ui/VendorInfoForm.vue';
 import PreviewModal from './ui/PreviewModal.vue';
+import ManageFranchiseAbout from './ui/franchise/ManageFranchiseAbout.vue';
 
 export default {
   name: 'ManageMainContent',
@@ -35,6 +40,10 @@ export default {
 
     const currentTabComponent = computed(() => {
       switch (props.activeTab) {
+        case '關於品牌':
+          return ManageFranchiseAbout;
+
+
         case '廠商資訊':
           return VendorInfoForm;
         default:
