@@ -72,6 +72,7 @@
         @mousedown="startResize">
       </div>
     </div>
+<<<<<<< HEAD
 
     <!-- 在工具欄中添加圖片上傳按鈕 -->
     <div class="flex items-center gap-2">
@@ -87,6 +88,8 @@
         插入圖片
     </button>
     </div>
+=======
+>>>>>>> master
   </template>
   
   <script setup>

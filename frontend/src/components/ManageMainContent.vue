@@ -2,7 +2,11 @@
 <template>
     <div class="flex-1 p-8">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold">{{ activeTab }}</h2>
+        <h2 class="text-2xl font-bold">{{ activeTab }}</h2><br>
+        <div>
+          {{ activeTab }}
+          
+        </div>
         <button
           class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded flex items-center"
           @click="isPreviewOpen = true"
