@@ -43,7 +43,6 @@ export default {
         case '關於品牌':
           return ManageFranchiseAbout;
 
-
         case '廠商資訊':
           return VendorInfoForm;
         default:

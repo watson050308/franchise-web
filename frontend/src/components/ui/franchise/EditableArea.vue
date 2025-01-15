@@ -72,6 +72,24 @@
         @mousedown="startResize">
       </div>
     </div>
+<<<<<<< HEAD
+
+    <!-- 在工具欄中添加圖片上傳按鈕 -->
+    <div class="flex items-center gap-2">
+    <input 
+        type="file" 
+        ref="fileInput" 
+        accept="image/*" 
+        class="hidden"
+        @change="handleImageUpload">
+    <button 
+        @click="triggerImageUpload"
+        class="p-2 hover:bg-gray-200 rounded">
+        插入圖片
+    </button>
+    </div>
+=======
+>>>>>>> master
   </template>
   
   <script setup>
@@ -175,6 +193,23 @@
     document.removeEventListener('mousemove', handleResize)
     document.removeEventListener('mouseup', stopResize)
   }
+
+  const fileInput = ref(null)
+
+const triggerImageUpload = () => {
+  fileInput.value.click()
+}
+// 處理圖像上傳
+const handleImageUpload = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      document.execCommand('insertImage', false, e.target.result)
+    }
+    reader.readAsDataURL(file)
+  }
+}
   
   // 生命週期
   onMounted(() => {
