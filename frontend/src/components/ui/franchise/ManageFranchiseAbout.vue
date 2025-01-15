@@ -1,5 +1,4 @@
 <template>
-  這是測試
   <div class="container mx-auto p-4">
     <EditableArea
       v-model="content"
