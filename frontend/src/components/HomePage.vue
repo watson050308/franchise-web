@@ -15,7 +15,7 @@
 </template>
   
 <script>
-
+import { provide, ref } from 'vue'
 import CategoriesSection from './CategoriesSection.vue'
 import BaseSlide from './ui/BaseSlide.vue'
 
@@ -25,17 +25,20 @@ export default {
     BaseSlide,
     CategoriesSection
   },
-  data() {
+  setup() {
+    const expoCategories = ref([
+      {category: '加盟展', label: 'franchiseExpo', image: './src/assets/expo/franchise.png'},
+      {category: '寵物展', label: 'petExpo', image: './src/assets/expo/pet.png'},
+      {category: '旅遊展', label: 'travelExpo', image: './src/assets/expo/travel.png'},
+      {category: '科技展', label: 'techExpo', image: './src/assets/expo/tech.png'},
+      {category: '藝術展', label: 'artExpo', image: './src/assets/expo/art.png'},
+      {category: '美食展', label: 'foodExpo', image: './src/assets/expo/food.png'}
+    ])
+    
+    provide('expoCategories', expoCategories)
+    
     return {
-      expoCategories: [
-        {category: '加盟展', label: 'franchiseExpo'},
-        {category: '寵物展', label: 'petExpo'},
-        {category: '旅遊展', label: 'travelExpo'},
-        {category: '科技展', label: 'techExpo'},
-        {category: '藝術展', label: 'artExpo'},
-        {category: '美食展', label: 'foodExpo'}
-      ],
-      petCategories: ['寵物食品', '寵物用品', '寵物服務', '寵物醫療']
+      expoCategories
     }
   }
 }
