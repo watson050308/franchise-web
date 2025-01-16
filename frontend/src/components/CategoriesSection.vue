@@ -21,27 +21,18 @@
   </section>
 </template>
   
-<script>
+<script setup>
 import { ChevronRight } from 'lucide-vue-next'
 import BaseCard from './ui/BaseCard.vue'
-// import CardTitle from './ui/BaseCard.vue'
 
-export default {
-  name: 'CategoriesSection',
-  components: {
-    BaseCard,
-    // CardTitle,
-    ChevronRight
+defineProps({
+  sectionTitle: {
+    type: String,
+    default: '熱門品牌展館'
   },
-  props: {
-    sectionTitle: {
-      type: String,
-      default: '熱門品牌展館'
-    },
-    categories: {
-      type: Array,
-      default: () => ['餐飲', '零售', '教育', '美容健康']
-    }
+  categories: {
+    type: Array,
+    default: () => ['餐飲', '零售', '教育', '美容健康']
   }
-}
+})
 </script>

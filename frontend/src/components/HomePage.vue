@@ -14,32 +14,27 @@
   </div>
 </template>
   
-<script>
+<script setup>
 import { provide, ref } from 'vue'
 import CategoriesSection from './CategoriesSection.vue'
 import BaseSlide from './ui/BaseSlide.vue'
 
-export default {
-  name: 'HomePage',
-  components: {
-    BaseSlide,
-    CategoriesSection
-  },
-  setup() {
-    const expoCategories = ref([
-      {category: '加盟展', label: 'franchiseExpo', image: './src/assets/expo/franchise.png'},
-      {category: '寵物展', label: 'petExpo', image: './src/assets/expo/pet.png'},
-      {category: '旅遊展', label: 'travelExpo', image: './src/assets/expo/travel.png'},
-      {category: '科技展', label: 'techExpo', image: './src/assets/expo/tech.png'},
-      {category: '藝術展', label: 'artExpo', image: './src/assets/expo/art.png'},
-      {category: '美食展', label: 'foodExpo', image: './src/assets/expo/food.png'}
-    ])
-    
-    provide('expoCategories', expoCategories)
-    
-    return {
-      expoCategories
-    }
-  }
-}
+// 直接導入圖片
+import franchiseImg from '../assets/expo/franchise.png'
+import petImg from '../assets/expo/pet.png'
+import travelImg from '../assets/expo/travel.png'
+import techImg from '../assets/expo/tech.png'
+import artImg from '../assets/expo/art.png'
+import foodImg from '../assets/expo/food.png'
+
+const expoCategories = ref([
+  {category: '加盟展', label: 'franchiseExpo', image: franchiseImg},
+  {category: '寵物展', label: 'petExpo', image: petImg},
+  {category: '旅遊展', label: 'travelExpo', image: travelImg},
+  {category: '科技展', label: 'techExpo', image: techImg},
+  {category: '藝術展', label: 'artExpo', image: artImg},
+  {category: '美食展', label: 'foodExpo', image: foodImg}
+])
+
+provide('expoCategories', expoCategories)
 </script>
