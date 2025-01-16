@@ -1,15 +1,19 @@
 <template>
   <section>
-    <h2 class="text-2xl font-semibold mb-6">{{ sectionTitle }}</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <BaseCard v-for="(expoCategorie, index) in categories" :key="index" class="hover:shadow-lg transition-shadow">
-        <template #header>
-          <!-- <CardTitle class="text-lg font-semibold">{{ category }}</CardTitle> -->
-          <h3 class="text-lg font-semibold">{{ expoCategorie.category }}</h3>
-        </template>
+    <h2 class="text-2xl font-bold mb-8">{{ sectionTitle }}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <BaseCard 
+        v-for="(expoCategorie, index) in categories" 
+        :key="index" 
+        :current-category="expoCategorie.category"
+      >
         <template #content>
-          <router-link :to="{path: '/showbrand', query: {category: expoCategorie.label}}" href="#" class="text-blue-600 flex items-center hover:underline">
-            查看機會 <ChevronRight class="ml-1" :size="16" />
+          <router-link 
+            :to="{path: '/showbrand', query: {category: expoCategorie.label}}" 
+            class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+          >
+            查看機會 
+            <ChevronRight class="ml-1 w-4 h-4" />
           </router-link>
         </template>
       </BaseCard>
