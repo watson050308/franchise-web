@@ -25,14 +25,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'BrandCard',
-  props: {
-    brand: {
-      type: Object,
-      required: true
-    }
+<script setup>
+defineProps({
+  brand: {
+    type: Object,
+    required: true
   }
-};
+})
 </script>

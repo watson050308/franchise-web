@@ -6,5 +6,6 @@ CREATE TABLE brands (
     brand_name VARCHAR(256) NOT NULL,
     brand_eng_name VARCHAR(256) NOT NULL,
     industry_id INTEGER NOT NULL,
-    franchise_info_id INTEGER NOT NULL
+    franchise_info_id INTEGER NOT NULL,
+    company_id INTEGER NOT NULL
 );

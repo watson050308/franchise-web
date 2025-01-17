@@ -1,17 +1,16 @@
 <template>
-  <div class="bg-white shadow rounded-lg overflow-hidden">
-    <div v-if="$slots.header" class="px-4 py-5 sm:px-6">
-      <img alt="Vue logo" src="../../assets/category/redorange.png">
-      <slot name="header"></slot>
-    </div>
-    <div class="px-4 py-5 sm:p-6">
-      <slot name="content"></slot>
-    </div>
+  <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
+    <slot name="content"></slot>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'BaseCard'
-}
+<script setup>
+// BaseCard 不需要任何 props 或其他邏輯，
+// 只需要提供一個具名插槽 "content" 供內容插入
 </script>
+
+<style scoped>
+.group:hover {
+  transform: translateY(-2px);
+}
+</style>

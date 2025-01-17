@@ -171,89 +171,68 @@
   </header>
 </template>
 
-<script>
-import { ref, computed, nextTick} from 'vue';
+<script setup>
+import { ref, computed } from 'vue'
 
-export default {
-  name: 'BaseHeader',
-  setup() {
-    const isMenuOpen = ref(false);
-    const isSearchOpen = ref(false);
-    const searchQuery = ref('');
-    const showSuggestions = ref(false);
-    const searchInput = ref(null);
+const isMenuOpen = ref(false)
+const isSearchOpen = ref(false)
+const searchQuery = ref('')
+const showSuggestions = ref(false)
+const searchInput = ref(null)
 
-    const menuItems = [
-      { name: '首頁', path: '/' },
-      { name: '尋找展館', path: '/exhibition' },
-      { name: '展商支援', path: '/brandSupport' },
-      { name: '聯絡我們', path: '/about-us' },
-      { name: '登入', path: '/login' },
-    ];
+const menuItems = [
+  { name: '首頁', path: '/' },
+  { name: '尋找展館', path: '/exhibition' },
+  { name: '展商支援', path: '/brandSupport' },
+  { name: '聯絡我們', path: '/about-us' },
+  { name: '登入', path: '/login' }
+]
 
-    const brands = [
-      { name: '紅橘子' },
-      { name: '紅吉子' },
-      { name: '紅柿子' },
-    ];
+const brands = [
+  { name: '紅橘子' },
+  { name: '紅吉子' },
+  { name: '紅柿子' }
+]
 
-    const filteredBrands = computed(() => {
-      if (!searchQuery.value) return [];
-      return brands.filter(brand => 
-        brand.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-      );
-    });
+const filteredBrands = computed(() => {
+  if (!searchQuery.value) return []
+  return brands.filter(brand => 
+    brand.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  )
+})
 
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value;
-    };
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value
+}
 
-    const toggleSearch = () => {
-      isSearchOpen.value = !isSearchOpen.value;
-      if (isSearchOpen.value) {
-        nextTick(() => {
-          searchInput.value?.focus();
-        });
-      }
-    };
-
-    const handleSearchInput = () => {
-      showSuggestions.value = true;
-    };
-
-    const performSearch = () => {
-      console.log('Searching for:', searchQuery.value);
-      isSearchOpen.value = false;
-      showSuggestions.value = false;
-    };
-
-    const handleBlur = () => {
-      setTimeout(() => {
-        isSearchOpen.value = false;
-        showSuggestions.value = false;
-      }, 200);
-    };
-
-    const selectBrand = (brandName) => {
-      searchQuery.value = brandName;
-      performSearch();
-    };
-
-    return {
-      isMenuOpen,
-      isSearchOpen,
-      searchQuery,
-      showSuggestions,
-      searchInput,
-      menuItems,
-      filteredBrands,
-      toggleMenu,
-      toggleSearch,
-      handleSearchInput,
-      performSearch,
-      handleBlur,
-      selectBrand
-    };
+const toggleSearch = () => {
+  isSearchOpen.value = !isSearchOpen.value
+  if (isSearchOpen.value) {
+    nextTick(() => {
+      searchInput.value?.focus()
+    })
   }
-};
+}
+
+const handleSearchInput = () => {
+  showSuggestions.value = true
+}
+
+const performSearch = () => {
+  console.log('Searching for:', searchQuery.value)
+  isSearchOpen.value = false
+  showSuggestions.value = false
+}
+
+const handleBlur = () => {
+  setTimeout(() => {
+    isSearchOpen.value = false
+    showSuggestions.value = false
+  }, 200)
+}
+
+const selectBrand = (brandName) => {
+  searchQuery.value = brandName
+  performSearch()
+}
 </script>

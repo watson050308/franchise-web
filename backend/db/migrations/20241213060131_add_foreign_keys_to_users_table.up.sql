@@ -3,7 +3,7 @@ ADD CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles (id)
     ON UPDATE CASCADE
     ON DELETE SET NULL;
 
-ALTER TABLE users
-ADD CONSTRAINT fk_company FOREIGN KEY (company_id) REFERENCES companies (id)
+ALTER TABLE companies
+ADD CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users (id)
     ON UPDATE CASCADE
     ON DELETE SET NULL;
