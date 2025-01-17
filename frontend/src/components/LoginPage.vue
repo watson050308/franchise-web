@@ -48,43 +48,39 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'LoginPage',
-  data() {
-    return {
-      isLogin: true,
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    }
-  },
-  methods: {
-    toggleForm() {
-      this.isLogin = !this.isLogin
-      this.resetForm()
-    },
-    resetForm() {
-      this.name = ''
-      this.email = ''
-      this.password = ''
-      this.confirmPassword = ''
-    },
-    handleSubmit() {
-      if (this.isLogin) {
-        console.log('登入表單提交', { email: this.email, password: this.password })
-        // 在這裡處理登入邏輯
-      } else {
-        console.log('註冊表單提交', {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-          confirmPassword: this.confirmPassword
-        })
-        // 在這裡處理註冊邏輯
-      }
-    }
+<script setup>
+import { ref } from 'vue'
+
+const isLogin = ref(true)
+const name = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+
+const toggleForm = () => {
+  isLogin.value = !isLogin.value
+  resetForm()
+}
+
+const resetForm = () => {
+  name.value = ''
+  email.value = ''
+  password.value = ''
+  confirmPassword.value = ''
+}
+
+const handleSubmit = () => {
+  if (isLogin.value) {
+    console.log('登入表單提交', { email: email.value, password: password.value })
+    // 在這裡處理登入邏輯
+  } else {
+    console.log('註冊表單提交', {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      confirmPassword: confirmPassword.value
+    })
+    // 在這裡處理註冊邏輯
   }
 }
 </script>

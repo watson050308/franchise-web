@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gradient-to-r from-purple-500 via-blue-500 to-green-500">
+    <div v-if="supportCategories.length" class="min-h-screen bg-gradient-to-r from-purple-500 via-blue-500 to-green-500">
       <!-- 主要內容區 -->
       <div class="container mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold text-white text-center mb-8">展商支援中心</h1>
@@ -44,7 +44,7 @@
   </template>
   
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { Search, MessageCircle } from 'lucide-vue-next';
 
 const supportCategories = ref([
@@ -53,6 +53,12 @@ const supportCategories = ref([
 	{ title: '與訪客互動', icon: '💬', description: '了解如何與潛在客戶進行有效溝通' },
 	{ title: '數據分析', icon: '📊', description: '追蹤和分析您的展位表現' },
 ]);
+
+// 確保組件掛載時數據已經準備好
+onMounted(() => {
+	// 如果有需要從API獲取數據，可以在這裡處理
+	console.log('BrandSupport component mounted')
+})
 </script>
   
 <style scoped>
