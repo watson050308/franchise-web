@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS seach_tags;
+DROP TABLE IF EXISTS search_tags;

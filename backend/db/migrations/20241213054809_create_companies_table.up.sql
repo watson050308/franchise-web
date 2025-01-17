@@ -11,5 +11,5 @@ CREATE TABLE companies (
     company_email VARCHAR(256) NOT NULL,
     company_address VARCHAR(256) NOT NULL,
     web_url VARCHAR(1024),
-    brand_id INTEGER
+    user_id INTEGER NOT NULL
 );

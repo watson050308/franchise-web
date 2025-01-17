@@ -8,8 +8,7 @@ CREATE TABLE users (
     user_email VARCHAR(256) UNIQUE NOT NULL,
     user_password VARCHAR(256) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
-    role_id INTEGER,
-    company_id INTEGER
+    role_id INTEGER NOT NULL
 );
 
 CREATE INDEX idx_user_email ON users (user_email);
