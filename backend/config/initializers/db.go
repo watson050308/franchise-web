@@ -54,10 +54,12 @@ func ConnectToDB() error {
 
 	defaultDSN := fmt.Sprintf(
 		"host=%s port=%s user=%s password=%s dbname=postgres sslmode=disable TimeZone=Asia/Taipei",
+
 		dbHost,
 		dbPort,
 		dbUser,
 		dbPassword,
+		dbName,
 	)
 
 	log.Println("defaultDSN: ", defaultDSN)
