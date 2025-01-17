@@ -15,25 +15,77 @@ import (
 )
 
 var (
-	DB  *gorm.DB
-	Rdb *redis.Client
+	DB     *gorm.DB
+	Rdb    *redis.Client
+	Getenv = os.Getenv
 )
 
-func ConnectToDB() {
+func GetCurrentEnv() string {
+	env := Getenv("ENV")
+	if env == "" {
+		return "development"
+	} else if env == "test" {
+		return "test"
+	}
+	log.Println("ENV:", env)
+	return env
+}
+
+func ConnectToDB() error {
 	var err error
-	var dbName string
-	var dbHost string
+	var dbName, dbHost string
 
 	dbPort := "5432"
 	dbUser := "admin"
 	dbPassword := "admin123"
-
-	if os.Getenv("ENV") == "docker" {
+	eenv := Getenv("ENV")
+	log.Println("eenv: ", eenv)
+	switch GetCurrentEnv() {
+	case "test":
+		dbHost = "localhost"
+		dbName = "test_db"
+	case "docker":
 		dbHost = "postgres"
 		dbName = "production"
-	} else {
+	default:
 		dbHost = "localhost"
 		dbName = "development"
+	}
+
+	defaultDSN := fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=postgres sslmode=disable TimeZone=Asia/Taipei",
+		dbHost,
+		dbPort,
+		dbUser,
+		dbPassword,
+	)
+
+	log.Println("defaultDSN: ", defaultDSN)
+
+	defaultDB, err := gorm.Open(postgres.Open(defaultDSN), &gorm.Config{})
+	if err != nil {
+		return fmt.Errorf("failed to connect to default database: %w", err)
+	}
+
+	var exists bool
+	err = defaultDB.Raw("SELECT EXISTS (SELECT 1 FROM pg_database WHERE datname = ?)", dbName).Scan(&exists).Error
+	if err != nil {
+		return fmt.Errorf("failed to check if database exists: %w", err)
+	}
+
+	if !exists {
+		log.Printf("Database '%s' does not exist. Creating...\n", dbName)
+		if err := defaultDB.Exec(fmt.Sprintf("CREATE DATABASE \"%s\"", dbName)).Error; err != nil {
+			return fmt.Errorf("failed to create database: %w", err)
+		}
+		log.Printf("Database '%s' created successfully!\n", dbName)
+	} else {
+		log.Printf("Database '%s' already exists.\n", dbName)
+	}
+
+	sqlDB, err := defaultDB.DB()
+	if err == nil {
+		sqlDB.Close()
 	}
 
 	dsn := fmt.Sprintf(
@@ -47,78 +99,58 @@ func ConnectToDB() {
 
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatalf("failed to connect to PostgreSQL: %v", err)
-	}
-
-	var exists bool
-	err = DB.Raw("SELECT EXISTS (SELECT 1 FROM pg_database WHERE datname = ?)", dbName).Scan(&exists).Error
-	if err != nil {
-		log.Fatalf("failed to check if database exists: %v", err)
-	}
-
-	if !exists {
-		if err := DB.Exec(fmt.Sprintf("CREATE DATABASE %s", dbName)).Error; err != nil {
-			log.Fatalf("failed to create database: %v", err)
-		}
-		log.Printf("Database '%s' created successfully!\n", dbName)
-	} else {
-		log.Printf("Database '%s' already exists.\n", dbName)
-	}
-
-	dsn = fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable TimeZone=Asia/Taipei",
-		dbHost,
-		dbPort,
-		dbUser,
-		dbPassword,
-		dbName,
-	)
-
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		log.Fatalf("failed to connect to %s database: %v", dbName, err)
+		return fmt.Errorf("failed to connect to %s database: %w", dbName, err)
 	}
 
 	log.Printf("Connected to '%s' database successfully!\n", dbName)
 
-	applyMigrations(dbName)
+	err = ApplyMigrations(dbName)
+	if err != nil {
+		return fmt.Errorf("failed to apply migrations: %w", err)
+	}
 
+	return nil
 }
 
-func applyMigrations(dbName string) {
+func ApplyMigrations(dbName string) error {
 	fileUrl := func() string {
 		if dbName == "production" {
 			return "file:///root/db/migrations"
+		} else if dbName == "test_db" {
+			return "file://../../../backend/db/migrations"
 		}
 		return "file://../backend/db/migrations"
 	}()
-
+	wd, _ := os.Getwd()
+	log.Println(wd)
+	log.Println("fileUrl: ", fileUrl)
 	sqlDB, err := DB.DB()
 	if err != nil {
-		log.Fatalf("failed to get database instance: %v", err)
+		return fmt.Errorf("failed to get database instance: %v", err)
 	}
 
 	if err := sqlDB.Ping(); err != nil {
-		log.Fatalf("failed to ping database: %v", err)
+		return fmt.Errorf("failed to ping database: %v", err)
 	}
 
 	driver, err := migratePostgres.WithInstance(sqlDB, &migratePostgres.Config{})
 	if err != nil {
-		log.Fatalf("could not create migration driver: %v", err)
+		return fmt.Errorf("could not create migration driver: %v", err)
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
 		fileUrl,
 		"postgres", driver)
 	if err != nil {
-		log.Fatalf("migration setup failed: %v", err)
+		return fmt.Errorf("migration setup failed: %v", err)
 	}
 
 	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
-		log.Fatalf("migration failed: %v", err)
+		return fmt.Errorf("migration failed: %v", err)
 	}
 
 	log.Println("Migrations applied successfully!")
+	return nil
 }
 
 func ConnectToRedis() {
