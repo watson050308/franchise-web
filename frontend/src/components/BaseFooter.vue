@@ -6,13 +6,10 @@
   </footer>
 </template>
   
-<script>
-export default {
-  name: 'BaseFooter',
-  computed: {
-    currentYear() {
-      return new Date().getFullYear()
-    }
-  }
-}
+<script setup>
+import { computed } from 'vue'
+
+const currentYear = computed(() => {
+  return new Date().getFullYear()
+})
 </script>
