@@ -20,7 +20,7 @@
           </svg>
         </router-link>
 
-        <!-- 漢堡選單按鈕 -->
+        <!-- hamburger menu -->
         <button 
           @click="toggleMenu"
           class="md:hidden text-gray-700 hover:text-green-600 transition-colors duration-300"
@@ -105,18 +105,56 @@
             </div>
           </div>
 
-          <!-- 登入按鈕 -->
-          <router-link 
-            to="/login"
-            class="text-gray-700 hover:text-green-600 transition-colors duration-300"
-          >
-            登入
-          </router-link>
+            <div class="relative">
+              <template v-if="isLogin">
+                <button 
+                  @click="toggleUserMenu"
+                  class="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-300"
+                >
+                  <span>{{ user.name }}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                
+                <div v-if="showUserMenu" 
+                    class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                  <router-link 
+                    to="/app-management"
+                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    @click="showUserMenu = false"
+                  >
+                    個人資料
+                  </router-link>
+                  <router-link 
+                    to="/app-management"
+                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    @click="showUserMenu = false"
+                  >
+                    管理面板
+                  </router-link>
+                  <button 
+                    @click="handleLogout"
+                    class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    登出
+                  </button>
+                </div>
+              </template>
+              
+              <router-link 
+                v-else
+                to="/login"
+                class="text-gray-700 hover:text-green-600 transition-colors duration-300"
+              >
+                登入
+              </router-link>
+            </div>
         </div>
       </div>
     </nav>
 
-    <!-- 行動裝置選單 -->
+    <!-- mobile menu -->
     <transition
       enter-active-class="transition duration-200 ease-out"
       enter-from-class="transform -translate-y-full opacity-0"
@@ -171,68 +209,105 @@
   </header>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue'
+<script setup lang="ts">
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuth } from '@/composables/useAuth';
 
-const isMenuOpen = ref(false)
-const isSearchOpen = ref(false)
-const searchQuery = ref('')
-const showSuggestions = ref(false)
-const searchInput = ref(null)
+const router = useRouter();
+const { user, logout, isLogin, checkAuth } = useAuth();
+
+const isMenuOpen = ref(false);
+const isSearchOpen = ref(false);
+const searchQuery = ref('');
+const showSuggestions = ref(false);
+const searchInput = ref(null);
+const showUserMenu = ref(false);
 
 const menuItems = [
   { name: '首頁', path: '/' },
   { name: '尋找展館', path: '/exhibition' },
   { name: '展商支援', path: '/brandSupport' },
   { name: '聯絡我們', path: '/about-us' },
-  { name: '登入', path: '/login' }
-]
+];
 
 const brands = [
   { name: '紅橘子' },
   { name: '紅吉子' },
-  { name: '紅柿子' }
-]
+  { name: '紅柿子' },
+];
 
 const filteredBrands = computed(() => {
-  if (!searchQuery.value) return []
+  if (!searchQuery.value) return [];
   return brands.filter(brand => 
     brand.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
-})
+  );
+});
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
+  isMenuOpen.value = !isMenuOpen.value;
+};
 
 const toggleSearch = () => {
-  isSearchOpen.value = !isSearchOpen.value
+  isSearchOpen.value = !isSearchOpen.value;
   if (isSearchOpen.value) {
     nextTick(() => {
-      searchInput.value?.focus()
-    })
+      searchInput.value?.focus();
+    });
   }
-}
+};
 
 const handleSearchInput = () => {
-  showSuggestions.value = true
-}
+  showSuggestions.value = true;
+};
 
 const performSearch = () => {
-  console.log('Searching for:', searchQuery.value)
-  isSearchOpen.value = false
-  showSuggestions.value = false
-}
+  console.log('Searching for:', searchQuery.value);
+  isSearchOpen.value = false;
+  showSuggestions.value = false;
+};
 
 const handleBlur = () => {
   setTimeout(() => {
-    isSearchOpen.value = false
-    showSuggestions.value = false
-  }, 200)
-}
+    isSearchOpen.value = false;
+    showSuggestions.value = false;
+  }, 200);
+};
 
-const selectBrand = (brandName) => {
-  searchQuery.value = brandName
-  performSearch()
-}
+const selectBrand = (brandName: string) => {
+  searchQuery.value = brandName;
+  performSearch();
+};
+
+const toggleUserMenu = () => {
+  // prevent closeUserMenu to close the user menu
+  event.stopPropagation();
+  showUserMenu.value = !showUserMenu.value;
+};
+
+const handleLogout = async () => {
+  try {
+    await logout();
+    showUserMenu.value = false;
+    router.push('/login');
+  } catch (error) {
+    console.error('Logout failed:', error);
+  }
+};
+
+// close user menu when click outside
+const closeUserMenu = (event: MouseEvent) => {
+  const target = event.target as HTMLElement;
+  if (!target.closest('.user-menu')) {
+    showUserMenu.value = false;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('click', closeUserMenu);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', closeUserMenu);
+});
 </script>
