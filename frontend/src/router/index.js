@@ -8,6 +8,8 @@ import ShowBrand from '../components/ShowBrand.vue'
 import BrandSupport from '../components/BrandSupport.vue'
 import AboutUsPage from '../components/AboutUsPage.vue'
 
+const base = process.env.NODE_ENV === 'production' ? '/franchise-web/' : '/'
+
 const routes = [
   {
     path: '/',
@@ -52,7 +54,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(base),
   routes
 })
 
