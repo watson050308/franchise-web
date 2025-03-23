@@ -11,6 +11,12 @@ services:
       - "5432:5432"
     networks:
       - franchise_web_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   pgadmin:
     image: dpage/pgadmin4
@@ -34,6 +40,11 @@ services:
       - ~/docker_data/redis:/data
     networks:
       - franchise_web_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   redisinsight:
     image: redislabs/redisinsight:latest
@@ -42,6 +53,26 @@ services:
       - "5540:5540"
     depends_on:
       - redis
+    networks:
+      - franchise_web_network
+
+  franchise-backend:
+    container_name: franchise-backend
+    image: franchise-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      ENV: docker
+      DATABASE_URL: postgres://admin:admin123@postgres:5432/mydb
+      REDIS_URL: redis://redis:6379
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     networks:
       - franchise_web_network
 
