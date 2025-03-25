@@ -51,6 +51,5 @@ docker network create franchise_web_network
 You’ll need two Docker Compose files to manage your application and database services. Now, create two Docker Compose files: `docker-compose.data` and `docker-compose.app`.
 
 ```command
-docker-compose -f docker-compose.data.yaml -p franchise_database up -d
-docker-compose -f docker-compose.app.yaml -p franchise_web up -d
+docker-compose up
 ```
